@@ -1,12 +1,18 @@
-let button = document.querySelector(".quote-btn");
-let quote = document.querySelector(".quote");
-let author = document.querySelector(".author");
-let container = document.querySelector(".quote-container");
-let authorImage = document.querySelector(".author-image");
+const button = document.querySelector(".quote-btn");
+const quote = document.querySelector(".quote");
+const author = document.querySelector(".author");
+const container = document.querySelector(".container");
+const content = document.querySelector(".content");
+const quoteContainer = document.querySelector(".quote-container");
+const authorImage = document.getElementById("author-image");
+const spinner = document.querySelector(".lds-ring");
 
 button.addEventListener("click", getQuote);
 
 async function getQuote() {
+    container.classList.add("loading");
+    spinner.style.display = "flex";
+    content.style.display = "none";
     const quoteEndpoint = "https://api.quotable.io/random"
     const imageEndpoint = "https://images.quotable.dev/profile/200/"
 
@@ -20,12 +26,21 @@ async function getQuote() {
         const imageResponse = await fetch(imageUrl);
         const imageBlob = await imageResponse.blob();
         authorImage.src = URL.createObjectURL(imageBlob);
+        authorImage.alt = quoteData.author;
 
         quote.textContent = quoteData.content;
         author.textContent = quoteData.author + ".";
+        container.classList.remove("loading");
+        content.style.display = "flex";
+        spinner.style.display = "none";
     } else {
-        quote.textContent = "An error occured";
-        console.log(quoteData);
+        const errorMessage = "An error occurred. Please try again later.";
+        quote.textContent = errorMessage;
+        author.textContent = "A lazy dev.";
+        container.classList.remove("loading");
+        spinner.style.display = "none";
+        content.style.display = "flex"
+        authorImage.src = "https://play-lh.googleusercontent.com/xlnwmXFvzc9Avfl1ppJVURc7f3WynHvlA749D1lPjT-_bxycZIj3mODkNV_GfIKOYJmG"
     }
 }
 

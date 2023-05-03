@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TPO CaC</title>
+    <title>Random Quote Generator</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32 16x16">
+    <link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="android-chrome-512x512.png" sizes="512x512">
+    <link rel="apple-touch-icon" type="image/png" href="apple-touch-icon.png" sizes="180x180">
 </head>
 
 <body>
@@ -28,14 +32,22 @@
         </div>
     </div>
     <div class="container">
-        <div class="image-container"><img src="" class="author-image" /></div>
-        <div class="quote-container">
-            <div class="quote"></div>
-            <div class="author"></div>
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="content">
+            <div class="image-container"><img src="" class="author-image" id="author-image" /></div>
+            <div class="quote-container">
+                <div class="quote" id="quote"></div>
+                <div class="author" id="author"></div>
+            </div>
         </div>
     </div>
     <button class="quote-btn">Get new quote!</button>
 </body>
-<script src="script.js" async defer></script>
+<script src="js/script.js" async defer></script>
 
 </html>

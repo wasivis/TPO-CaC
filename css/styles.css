@@ -91,7 +91,7 @@ li a:hover:not(.active) {
     justify-content: center;
 }
 
-.subtitle h3{
+.subtitle h3 {
     font-weight: 400;
     font-size: 24px;
     text-align: center;
@@ -101,7 +101,7 @@ li a:hover:not(.active) {
 .authors-subtitle {
     width: 100%;
     border-bottom: 0.5px solid #cbcbcb;
-    margin-bottom: 20px;
+    margin: 0 0 20px 0;
 }
 
 .authors-subtitle h3 {
@@ -116,6 +116,13 @@ li a:hover:not(.active) {
     margin: 40px 0 40px 0;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
+}
+
+.quote-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .dailyQuote-container {
@@ -138,7 +145,7 @@ li a:hover:not(.active) {
     padding: 1rem;
 }
 
-.quote {
+#quote {
     margin: 10px 0 20px;
     text-align: left;
     font-style: italic;
@@ -149,35 +156,35 @@ li a:hover:not(.active) {
     padding: 0;
 }
 
-.quote::before,
-.quote::after {
+#quote::before,
+#quote::after {
     position: absolute;
     font-size: 8rem;
     width: 6rem;
     height: 6rem;
 }
 
-.quote::before {
+#quote::before {
     content: '"';
     left: -6rem;
     top: -3rem;
     border-radius: 8px;
 }
 
-.quote::after {
+#quote::after {
     content: '"';
     right: -6rem;
     bottom: -1rem;
     border-radius: 8px;
 }
 
-.author {
-    margin-bottom: 10px;
+#author {
+    margin: 0 0 10px 0;
     font-size: 1.5rem;
     text-align: right;
 }
 
-.author::before {
+#author::before {
     content: "— ";
 }
 
@@ -216,11 +223,11 @@ li a:hover:not(.active) {
 .author-item {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 20px;
+    margin: 0 0 20px 0;
 }
 
 .author-image-container-list {
-    margin-right: 20px;
+    margin: 0 20px 0 0;
 }
 
 .author-image-list {
@@ -274,4 +281,48 @@ li a:hover:not(.active) {
 .total-pages {
     font-size: 18px;
     font-weight: 600;
+}
+
+
+.lds-ring {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #515151;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #515151 transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
