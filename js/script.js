@@ -27,6 +27,9 @@ async function getQuote() {
         const imageBlob = await imageResponse.blob();
         authorImage.src = URL.createObjectURL(imageBlob);
         authorImage.alt = quoteData.author;
+        authorImage.onerror = function () {
+            this.src = 'https://writingcenter.fas.harvard.edu/sites/hwpi.harvard.edu/files/writingcenter/files/person-icon.png?m=1606151135';
+        }
 
         quote.textContent = quoteData.content;
         author.textContent = quoteData.author + ".";

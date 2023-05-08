@@ -63,18 +63,24 @@ async function fetchAuthors(page) {
             nextButton.disabled = false;
         }
     } else {
-        console.log(authorsData);
+        const errorMessage = "An error occurred. Please try again later.";
+        quote.textContent = errorMessage;
+        author.textContent = "A lazy dev.";
+        container.classList.remove("loading");
+        spinner.style.display = "none";
+        content.style.display = "flex"
+        authorImage.src = "https://play-lh.googleusercontent.com/xlnwmXFvzc9Avfl1ppJVURc7f3WynHvlA749D1lPjT-_bxycZIj3mODkNV_GfIKOYJmG"
     }
 }
 
 fetchAuthors();
 
 prevButton.addEventListener("click", () => {
-  currentPage--;
-  fetchAuthors();
+    currentPage--;
+    fetchAuthors();
 });
 
 nextButton.addEventListener("click", () => {
-  currentPage++;
-  fetchAuthors();
+    currentPage++;
+    fetchAuthors();
 });

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Contact</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32 16x16">
+    <link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="android-chrome-512x512.png" sizes="512x512">
+    <link rel="apple-touch-icon" type="image/png" href="apple-touch-icon.png" sizes="180x180">
+</head>
+
+<body>
+    <ul class="navbar">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="quoteoftheday.html">Quote of the day</a></li>
+        <li><a href="authors.html">Authors</a></li>
+        <li><a class="active" href="contact.html">Contact</a></li>
+    </ul>
+    <div class="title-container">
+        <div class="title">
+            <h1>Contact</h1>
+        </div>
+        <div class="subtitle">
+            <h3>If you have any suggestions on how to make our site better, or if there's a quote you'd like to see in
+                the
+                future, please send us a message!</h3>
+        </div>
+    </div>
+    <form class="form-container" action="https://formspree.io/f/myyaovlb" method="POST">
+        <div class="form-row">
+            <input type="text" name="name" placeholder="Name" class="form-input form-input-name" required>
+            <input type="email" name="_replyto" placeholder="E-mail" class="form-input form-input-email" required>
+        </div>
+        <textarea name="message" placeholder="Write your message here..." class="form-input form-input-message"
+            required></textarea>
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+    <div class="thank-you-message" style="display: none;">
+        <h2>Thank you for your message!</h2>
+    </div>
+</body>
+<script src="js/script4.js" async defer></script>
+
+</html>
