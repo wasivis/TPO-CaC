@@ -40,11 +40,11 @@ li a {
 }
 
 li a:hover:not(.active) {
-    background-color: #e5e5e59f;
+    background-color: #c3c3c34e;
 }
 
 .active {
-    background-color: #d4d4d4;
+    background-color: #c3c3c3;
 }
 
 .title-container {
@@ -210,6 +210,22 @@ li a:hover:not(.active) {
 .fa-brands:hover {
     transform: scale(1.2);
     cursor: pointer;
+}
+
+#twitter-share-btn {
+    color: #1DA1F2;
+}
+
+#linkedin-share-btn {
+    color: #0A66C2;
+}
+
+#facebook-share-btn {
+    color: #1877F2;
+}
+
+#reddit-share-btn {
+    color: #FF4500;
 }
 
 .author-item {

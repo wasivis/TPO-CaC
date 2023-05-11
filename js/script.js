@@ -6,10 +6,17 @@ const content = document.querySelector(".content");
 const quoteContainer = document.querySelector(".quote-container");
 const authorImage = document.getElementById("author-image");
 const spinner = document.querySelector(".lds-ring");
-const twitterShareLink = document.getElementById('twitter-share');
+const twitterShareButton = document.getElementById('twitter-share-btn');
+const facebookShareButton = document.getElementById('facebook-share-btn');
+const linkedInShareButton = document.getElementById('linkedin-share-btn');
+const redditShareButton = document.getElementById('reddit-share-btn');
 
 button.addEventListener("click", getQuote);
-twitterShareLink.addEventListener("click", shareOnTwitter);
+twitterShareButton.addEventListener("click", shareOnTwitter);
+facebookShareButton.addEventListener("click", shareOnFacebook);
+linkedInShareButton.addEventListener("click", shareOnLinkedIn);
+redditShareButton.addEventListener("click", shareOnReddit);
+
 
 async function getQuote() {
     container.classList.add("loading");
@@ -54,9 +61,40 @@ function shareOnTwitter() {
     const quoteText = '"' + quote.textContent.trim() + '"';
     const authorText = author.textContent.trim();
     const url = "https://wasivis.github.io/randomquotegenerator/";
-    const text = encodeURIComponent(`${quoteText} - ${authorText}\n\nVisit ${url} for more random quotes!`);
+    const text = encodeURIComponent(`${quoteText} - ${authorText}\n\nVisit ${url} for more inspirational quotes!`);
     const twitterShareUrl = `https://twitter.com/intent/tweet?text=${text}&hashtags=RandomQuoteGenerator`;
     window.open(twitterShareUrl, "_blank");
+}
+
+function shareOnLinkedIn() {
+    const quoteText = '"' + quote.textContent.trim() + '"';
+    const authorText = author.textContent.trim();
+    const url = "https://wasivis.github.io/randomquotegenerator/";
+    const title = encodeURIComponent(`${quoteText} - ${authorText}`);
+    const description = encodeURIComponent("Visit Random Quote Generator for more inspirational quotes!");
+    const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${description}`;
+    window.open(linkedInShareUrl, "_blank");
+  }
+  
+
+function shareOnFacebook() {
+    const quoteText = '"' + quote.textContent.trim() + '"';
+    const authorText = author.textContent.trim();
+    const url = "https://wasivis.github.io/randomquotegenerator/";
+    const title = document.title;
+    const description = "Discover hundreds of inspiring quotes with Random Quote Generator!";
+    const image = "https://i.imgur.com/bjamLrr.png";
+    const facebookShareUrl = `https://www.facebook.com/sharer.php?u=${url}&quote=${quoteText} - ${authorText}&title=${title}&description=${description}&picture=${image}`;
+    window.open(facebookShareUrl, "_blank");
+}
+
+function shareOnReddit() {
+    const quoteText = '"' + quote.textContent.trim() + '"';
+    const authorText = author.textContent.trim();
+    const url = `${quoteText} - ${authorText}`;
+    const title = "Discover hundreds of inspiring quotes with Random Quote Generator! https://wasivis.github.io/randomquotegenerator/";
+    const redditShareUrl = `https://www.reddit.com/submit?url=${url}&title=${title}`;
+    window.open(redditShareUrl, "_blank");
 }
 
 getQuote();
