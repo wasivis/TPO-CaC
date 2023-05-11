@@ -70,7 +70,7 @@ li a:hover:not(.active) {
 
 .subtitle h3 {
     font-weight: 400;
-    font-size: 26px;
+    font-size: 22px;
     text-align: center;
 }
 
@@ -176,12 +176,40 @@ li a:hover:not(.active) {
     text-align: center;
     padding: 8px 12px;
     box-shadow: 0 10px #bfbfbf;
-    margin: 0;
+    margin: 0 0 50px 0;
 }
 
 .quote-btn:active {
     box-shadow: 0 6px #909090;
     transform: translateY(4px);
+}
+
+.social-media-sharing {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-media-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}
+
+.fa-brands {
+    margin: 10px 0 0 0;
+    font-size: 60px;
+    transition: transform ease-in-out 0.2s;
+    transform-origin: center center;
+}
+
+.fa-brands:hover {
+    transform: scale(1.2);
+    cursor: pointer;
 }
 
 .author-item {
@@ -212,7 +240,7 @@ li a:hover:not(.active) {
 }
 
 .author-bio {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.25;
     margin: 0;
 }

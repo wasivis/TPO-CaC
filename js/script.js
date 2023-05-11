@@ -6,8 +6,10 @@ const content = document.querySelector(".content");
 const quoteContainer = document.querySelector(".quote-container");
 const authorImage = document.getElementById("author-image");
 const spinner = document.querySelector(".lds-ring");
+const twitterShareLink = document.getElementById('twitter-share');
 
 button.addEventListener("click", getQuote);
+twitterShareLink.addEventListener("click", shareOnTwitter);
 
 async function getQuote() {
     container.classList.add("loading");
@@ -25,7 +27,8 @@ async function getQuote() {
 
         const imageResponse = await fetch(imageUrl);
         const imageBlob = await imageResponse.blob();
-        authorImage.src = URL.createObjectURL(imageBlob);
+        const authorImageUrl = URL.createObjectURL(imageBlob);
+        authorImage.src = authorImageUrl;
         authorImage.alt = quoteData.author;
         authorImage.onerror = function () {
             this.src = 'https://writingcenter.fas.harvard.edu/sites/hwpi.harvard.edu/files/writingcenter/files/person-icon.png?m=1606151135';
@@ -45,6 +48,15 @@ async function getQuote() {
         content.style.display = "flex"
         authorImage.src = "https://play-lh.googleusercontent.com/xlnwmXFvzc9Avfl1ppJVURc7f3WynHvlA749D1lPjT-_bxycZIj3mODkNV_GfIKOYJmG"
     }
+}
+
+function shareOnTwitter() {
+    const quoteText = '"' + quote.textContent.trim() + '"';
+    const authorText = author.textContent.trim();
+    const url = "https://wasivis.github.io/randomquotegenerator/";
+    const text = encodeURIComponent(`${quoteText} - ${authorText}\n\nVisit ${url} for more random quotes!`);
+    const twitterShareUrl = `https://twitter.com/intent/tweet?text=${text}&hashtags=RandomQuoteGenerator`;
+    window.open(twitterShareUrl, "_blank");
 }
 
 getQuote();
