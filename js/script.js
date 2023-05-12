@@ -8,13 +8,11 @@ const authorImage = document.getElementById("author-image");
 const spinner = document.querySelector(".lds-ring");
 const twitterShareButton = document.getElementById('twitter-share-btn');
 const facebookShareButton = document.getElementById('facebook-share-btn');
-const linkedInShareButton = document.getElementById('linkedin-share-btn');
 const redditShareButton = document.getElementById('reddit-share-btn');
 
 button.addEventListener("click", getQuote);
 twitterShareButton.addEventListener("click", shareOnTwitter);
 facebookShareButton.addEventListener("click", shareOnFacebook);
-linkedInShareButton.addEventListener("click", shareOnLinkedIn);
 redditShareButton.addEventListener("click", shareOnReddit);
 
 
@@ -66,33 +64,24 @@ function shareOnTwitter() {
     window.open(twitterShareUrl, "_blank");
 }
 
-function shareOnLinkedIn() {
-    const quoteText = '"' + quote.textContent.trim() + '"';
-    const authorText = author.textContent.trim();
-    const url = "https://wasivis.github.io/randomquotegenerator/";
-    const title = encodeURIComponent(`${quoteText} - ${authorText}`);
-    const description = encodeURIComponent("Visit Random Quote Generator for more inspirational quotes!");
-    const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${description}`;
-    window.open(linkedInShareUrl, "_blank");
-  }
-  
-
 function shareOnFacebook() {
     const quoteText = '"' + quote.textContent.trim() + '"';
     const authorText = author.textContent.trim();
+    const encodedQuote = encodeURIComponent(`${quoteText} - ${authorText}`);
     const url = "https://wasivis.github.io/randomquotegenerator/";
+    const encodedUrl = encodeURIComponent(url);
     const title = document.title;
     const description = "Discover hundreds of inspiring quotes with Random Quote Generator!";
-    const image = "https://i.imgur.com/bjamLrr.png";
-    const facebookShareUrl = `https://www.facebook.com/sharer.php?u=${url}&quote=${quoteText} - ${authorText}&title=${title}&description=${description}&picture=${image}`;
+    const image = "https://fbsymbols.net/wp-content/uploads/2022/11/quotation-mark-symbol.png";
+    const facebookShareUrl = `https://www.facebook.com/sharer.php?u=${encodedUrl}&quote=${encodedQuote}&title=${title}&description=${description}&picture=${image}`;
     window.open(facebookShareUrl, "_blank");
-}
+}  
 
 function shareOnReddit() {
     const quoteText = '"' + quote.textContent.trim() + '"';
     const authorText = author.textContent.trim();
-    const url = `${quoteText} - ${authorText}`;
-    const title = "Discover hundreds of inspiring quotes with Random Quote Generator! https://wasivis.github.io/randomquotegenerator/";
+    const url = "Discover hundreds of inspiring quotes with Random Quote Generator! https://wasivis.github.io/randomquotegenerator/";
+    const title = `${quoteText} - ${authorText}`;
     const redditShareUrl = `https://www.reddit.com/submit?url=${url}&title=${title}`;
     window.open(redditShareUrl, "_blank");
 }
