@@ -4,7 +4,11 @@ const container = document.querySelector(".container");
 const content = document.querySelector(".content");
 const authorImage = document.getElementById("daily-author-image");
 const spinner = document.querySelector(".lds-ring");
+const twitterShareButton = document.getElementById('twitter-btn');
 
+twitterShareButton.addEventListener("click", shareOnTwitter);
+
+//Fetch daily quote and store it in local data
 async function getDailyQuote() {
     container.classList.add("loading");
     spinner.style.display = "flex";
@@ -45,6 +49,7 @@ async function getDailyQuote() {
     }
 }
 
+//Function to compare dates
 function isSameDay(date1, date2) {
     return (
         date1.getFullYear() === date2.getFullYear() &&
@@ -53,6 +58,8 @@ function isSameDay(date1, date2) {
     );
 }
 
+//Checks if date of stored quote matches today's date.
+//If it does, displays stored quote. If it doesn't, fetches new quote.
 function getNewDailyQuote() {
     container.classList.add("loading");
     spinner.style.display = "flex";
@@ -74,6 +81,16 @@ function getNewDailyQuote() {
     } else {
         getDailyQuote();
     }
+}
+
+//Twitter sharing function
+function shareOnTwitter() {
+    const quoteText = '"' + quote.textContent.trim() + '"';
+    const authorText = author.textContent.trim();
+    const url = "https://wasivis.github.io/randomquotegenerator/";
+    const text = encodeURIComponent(`${quoteText} - ${authorText}\n\nVisit ${url} for more inspirational quotes!`);
+    const twitterShareUrl = `https://twitter.com/intent/tweet?text=${text}&hashtags=RandomQuoteGenerator`;
+    window.open(twitterShareUrl, "_blank");
 }
 
 getNewDailyQuote();

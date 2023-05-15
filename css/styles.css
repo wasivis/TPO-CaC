@@ -167,20 +167,25 @@ li a:hover:not(.active) {
 }
 
 .quote-btn {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 600;
     cursor: pointer;
-    border: 1px solid #545454;
+    border: 2px solid #000000;
     border-radius: 6px;
     background-color: #ffffff;
     text-align: center;
     padding: 8px 12px;
-    box-shadow: 0 10px #bfbfbf;
+    box-shadow: 6px 6px 4px #808080;
     margin: 0 0 50px 0;
 }
 
+.quote-btn:hover {
+    background-color: #cfcfcf;
+}
+
 .quote-btn:active {
-    box-shadow: 0 6px #909090;
+    background-color: #cfcfcf;
+    box-shadow: 6px 6px 4px #808080;
     transform: translateY(4px);
 }
 
@@ -200,32 +205,24 @@ li a:hover:not(.active) {
     gap: 32px;
 }
 
-.fa-brands {
-    margin: 10px 0 0 0;
+.twitter-sharing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0 0 0;
+    font-size: 18px;
+}
+
+.twitter-sharing i {
+    color: #1DA1F2;
     font-size: 60px;
     transition: transform ease-in-out 0.2s;
-    transform-origin: center center;
 }
 
-.fa-brands:hover {
-    transform: scale(1.2);
+.twitter-sharing i:hover {
     cursor: pointer;
-}
-
-#twitter-share-btn {
-    color: #1DA1F2;
-}
-
-#linkedin-share-btn {
-    color: #0A66C2;
-}
-
-#facebook-share-btn {
-    color: #1877F2;
-}
-
-#reddit-share-btn {
-    color: #FF4500;
+    transform: scale(1.2);
 }
 
 .author-item {
