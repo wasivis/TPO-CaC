@@ -5,11 +5,38 @@ const nextButton = document.getElementById("next-btn");
 const totalPages = document.querySelector(".total-pages");
 const displayPage = document.querySelector(".current-page");
 const authorList = document.getElementById("author-list");
-let allAuthors = null
+const searchInput = document.getElementById("search-input");
+const searchContainer = document.querySelector(".search-container");
+const errorMessage = document.getElementById("authors-error-message");
+const spinner = document.querySelector(".lds-ring");
+let allAuthors = null;
+let matchingAuthors = null;
 let currentPage = 1;
+
+//Event listener for search button
+searchContainer.addEventListener("click", (event) => {
+    if (event.target.matches("#search-button")) {
+        searchAuthors();
+    }
+});
+
+//Event listener for search input
+searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    if (searchTerm === "") {
+        matchingAuthors = null;
+        errorMessage.textContent = "";
+        renderPage(1, allAuthors);
+        const totalAllPages = Math.ceil(allAuthors.length / PAGE_SIZE);
+        totalPages.textContent = totalAllPages;
+        totalPages.dataset.totalPages = totalAllPages;
+        nextButton.disabled = currentPage === totalAllPages;
+    }
+});
 
 // Fetch all authors from the API endpoint
 async function fetchAllAuthors() {
+    spinner.style.display = "flex";
     const results = [];
     let page = 1;
     let totalPages = 1;
@@ -24,27 +51,29 @@ async function fetchAllAuthors() {
         }
         page++;
     }
+    spinner.style.display = "none";
     return results;
 }
 
 // Fetch all authors and render the first page
 async function fetchAuthors() {
+    try {
     allAuthors = await fetchAllAuthors();
-    if (allAuthors) {
         renderPage(1);
         totalPages.textContent = Math.ceil(allAuthors.length / PAGE_SIZE);
         totalPages.dataset.totalPages = totalPages.textContent;
-    } else {
-        console.log("An error occurred. Please try again later.")
+    } catch (error) {
+        console.log(error); // Log the error for debugging
+        errorMessage.textContent = "An error occurred. Please try again later.";
     }
 }
 
 // Render a specified page of authors
-function renderPage(page) {
+function renderPage(page, authors = allAuthors) {
     currentPage = page;
     const startIndex = (page - 1) * PAGE_SIZE;
     const endIndex = startIndex + PAGE_SIZE;
-    const pageAuthors = allAuthors.slice(startIndex, endIndex);
+    const pageAuthors = authors.slice(startIndex, endIndex);
 
     authorList.innerHTML = "";
 
@@ -91,23 +120,60 @@ function renderPage(page) {
         prevButton.disabled = false;
     }
 
-    if (currentPage === Number(totalPages.dataset.totalPages)) {
+    const totalMatchingPages = Math.ceil(
+        (matchingAuthors ? matchingAuthors.length : allAuthors.length) / PAGE_SIZE
+    );
+
+    if (currentPage === totalMatchingPages || totalMatchingPages === 1) {
         nextButton.disabled = true;
     } else {
         nextButton.disabled = false;
     }
 }
 
+//Search for authors that contain user's query
+function searchAuthors() {
+    errorMessage.textContent = "";
+    const searchTerm = searchInput.value.toLowerCase();
+    matchingAuthors = allAuthors.filter((author) =>
+        author.name.toLowerCase().includes(searchTerm));
+    currentPage = 1;
+
+    let totalMatchingPages = Math.ceil(
+        (matchingAuthors ? matchingAuthors.length : allAuthors.length) / PAGE_SIZE
+    );
+
+    if (matchingAuthors.length === 0) {
+        errorMessage.textContent = "No results found.";
+        totalMatchingPages = 1; // Set total pages to 1 when there are no matches
+    }
+
+    totalPages.textContent = totalMatchingPages;
+    totalPages.dataset.totalPages = totalMatchingPages;
+
+    renderPage(1, matchingAuthors || allAuthors);
+
+    nextButton.disabled = currentPage === totalMatchingPages;
+}
+
 //Event listeners for "Previous" and "Next" buttons
 prevButton.addEventListener("click", () => {
     if (currentPage > 1) {
-        renderPage(currentPage - 1);
+        if (matchingAuthors && matchingAuthors.length > 0) {
+            renderPage(currentPage - 1, matchingAuthors);
+        } else {
+            renderPage(currentPage - 1, allAuthors);
+        }
     }
 });
 
 nextButton.addEventListener("click", () => {
     if (currentPage < Number(totalPages.dataset.totalPages)) {
-        renderPage(currentPage + 1);
+        if (matchingAuthors && matchingAuthors.length > 0) {
+            renderPage(currentPage + 1, matchingAuthors);
+        } else {
+            renderPage(currentPage + 1, allAuthors);
+        }
     }
 });
 

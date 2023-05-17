@@ -28,6 +28,8 @@ body {
 
 ul {
     list-style-type: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 li a {
@@ -225,6 +227,45 @@ li a:hover:not(.active) {
     transform: scale(1.2);
 }
 
+.search-container {
+    margin: 20px 0 0 0;
+}
+
+#search-button,
+#search-input,
+.search-container {
+    font-size: 18px;
+    padding: 6px;
+}
+
+#search-input {
+    border-radius: 8px;
+    margin: 0 10px 0 0;
+}
+
+#search-button {
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 8px;
+    box-shadow: 0 4px #bfbfbf;
+}
+
+#search-button:active {
+    box-shadow: 0 2px #909090;
+    transform: translateY(2px);
+}
+
+#authors-error-message {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin: 60px 0 60px 0;
+}
+
+.list-container {
+    margin: 0;
+}
+
 .author-item {
     display: flex;
     align-items: flex-start;
@@ -270,7 +311,8 @@ li a:hover:not(.active) {
     height: fit-content;
     width: fit-content;
     border-radius: 6px;
-    box-shadow: 0 6px #bfbfbf;
+    border: 1px solid;
+    box-shadow: 0 4px #bfbfbf;
     padding: 6px;
 }
 
@@ -279,8 +321,15 @@ li a:hover:not(.active) {
 }
 
 .pagination-btn:active {
-    box-shadow: 0 3px #909090;
-    transform: translateY(4px);
+    box-shadow: 0 2px #909090;
+    transform: translateY(2px);
+}
+
+.pagination-btn:disabled {
+    color: #888888;
+    cursor: default;
+    transform: none;
+    box-shadow: 0 4px #bfbfbf;
 }
 
 .current-page,
@@ -296,6 +345,7 @@ li a:hover:not(.active) {
     align-items: center;
     width: 80px;
     height: 80px;
+    margin: 50px 0 0 0;
 }
 
 .lds-ring div {
@@ -380,7 +430,7 @@ li a:hover:not(.active) {
     margin: 0;
 }
 
-.form-button:active {
+.submit-btn:active {
     box-shadow: 0 6px #909090;
     transform: translateY(4px);
 }

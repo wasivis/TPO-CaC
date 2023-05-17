@@ -26,16 +26,22 @@
             <h1>Authors</h1>
         </div>
         <div class="subtitle">
-            <h3>Here's a list of all the authors that have at least one quote included in our website, along with a
-                short biography. Feel free to check them out!</h3>
+            <h3>Here's a list of all the authors featured on our website, along with a
+                short biography. You can use the search bar to look up specific ones!</h3>
         </div>
     </div>
     <div class="search-container">
-        <label for="search-input">Search Author:</label>
-        <input type="text" id="search-input">
+        <input type="text" id="search-input" placeholder="Search authors...">
         <button id="search-button">Search</button>
-      </div>
+    </div>
+    <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
     <div class="list-container">
+        <p id="authors-error-message"></p>
         <ul id="author-list"></ul>
     </div>
     <div class="pagination-container">
