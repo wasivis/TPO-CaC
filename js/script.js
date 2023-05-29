@@ -5,7 +5,7 @@ const container = document.querySelector(".container");
 const content = document.querySelector(".content");
 const quoteContainer = document.querySelector(".quote-container");
 const authorImage = document.getElementById("author-image");
-const spinner = document.querySelector(".lds-ring");
+const spinner = document.querySelector(".loader");
 const twitterShareButton = document.getElementById('twitter-btn');
 
 button.addEventListener("click", getQuote);

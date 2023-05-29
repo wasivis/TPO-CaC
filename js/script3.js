@@ -5,18 +5,28 @@ const nextButton = document.getElementById("next-btn");
 const totalPages = document.querySelector(".total-pages");
 const displayPage = document.querySelector(".current-page");
 const authorList = document.getElementById("author-list");
+const authorQuotesContainer = document.getElementById("author-quotes");
 const searchInput = document.getElementById("search-input");
 const searchContainer = document.querySelector(".search-container");
-const errorMessage = document.getElementById("authors-error-message");
-const spinner = document.querySelector(".lds-ring");
+const errorMessage = document.getElementById("authors-error-message")
+const spinner = document.querySelector(".loader");
 let allAuthors = null;
 let matchingAuthors = null;
 let currentPage = 1;
 
-//Event listener for search button
+const quotesEndpoint = "https://api.quotable.io/quotes";
+
+//Event listeners for search input
 searchContainer.addEventListener("click", (event) => {
     if (event.target.matches("#search-button")) {
         searchAuthors();
+    }
+});
+
+searchInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("search-button").click();
     }
 });
 
@@ -26,6 +36,7 @@ searchInput.addEventListener("input", () => {
     if (searchTerm === "") {
         matchingAuthors = null;
         errorMessage.textContent = "";
+        errorMessage.style.display = "none";
         renderPage(1, allAuthors);
         const totalAllPages = Math.ceil(allAuthors.length / PAGE_SIZE);
         totalPages.textContent = totalAllPages;
@@ -48,6 +59,7 @@ async function fetchAllAuthors() {
             totalPages = Math.ceil(data.totalCount / PAGE_SIZE);
         } else {
             console.log("An error occurred. Please try again later.")
+            errorMessage.textContent = "An error occurred. Please try again later.";
         }
         page++;
     }
@@ -58,12 +70,12 @@ async function fetchAllAuthors() {
 // Fetch all authors and render the first page
 async function fetchAuthors() {
     try {
-    allAuthors = await fetchAllAuthors();
+        allAuthors = await fetchAllAuthors();
         renderPage(1);
         totalPages.textContent = Math.ceil(allAuthors.length / PAGE_SIZE);
         totalPages.dataset.totalPages = totalPages.textContent;
     } catch (error) {
-        console.log(error); // Log the error for debugging
+        console.log(error);
         errorMessage.textContent = "An error occurred. Please try again later.";
     }
 }
@@ -80,6 +92,10 @@ function renderPage(page, authors = allAuthors) {
     for (const author of pageAuthors) {
         const listItem = document.createElement("li");
         listItem.classList.add("author-item");
+
+        listItem.addEventListener("click", () => {
+            loadAuthorQuotes(author.slug);
+        });
 
         const imageContainer = document.createElement("div");
         imageContainer.classList.add("author-image-container-list");
@@ -134,6 +150,7 @@ function renderPage(page, authors = allAuthors) {
 //Search for authors that contain user's query
 function searchAuthors() {
     errorMessage.textContent = "";
+    errorMessage.style.display = "none";
     const searchTerm = searchInput.value.toLowerCase();
     matchingAuthors = allAuthors.filter((author) =>
         author.name.toLowerCase().includes(searchTerm));
@@ -145,7 +162,8 @@ function searchAuthors() {
 
     if (matchingAuthors.length === 0) {
         errorMessage.textContent = "No results found.";
-        totalMatchingPages = 1; // Set total pages to 1 when there are no matches
+        errorMessage.style.display = "flex";
+        totalMatchingPages = 1;
     }
 
     totalPages.textContent = totalMatchingPages;

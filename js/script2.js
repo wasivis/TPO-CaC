@@ -3,7 +3,7 @@ const author = document.querySelector(".daily-author");
 const container = document.querySelector(".container");
 const content = document.querySelector(".content");
 const authorImage = document.getElementById("daily-author-image");
-const spinner = document.querySelector(".lds-ring");
+const spinner = document.querySelector(".loader");
 const twitterShareButton = document.getElementById('twitter-btn');
 
 twitterShareButton.addEventListener("click", shareOnTwitter);
